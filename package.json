@@ -40,20 +40,20 @@
   },
   "homepage": "https://github.com/curveball/new-package#readme",
   "devDependencies": {
-    "@curveball/kernel": "^1",
+    "@curveball/kernel": "^1.0.0",
     "@types/chai": "^4.2.15",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^16",
-    "@types/sinon": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "chai": "^4.3.0",
+    "@types/node": "^18.19.9",
+    "@types/sinon": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "chai": "^5.0.0",
     "eslint": "^8.13.0",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
-    "sinon": "^15.0.1",
+    "sinon": "^17.0.1",
     "ts-node": "^10.7.0",
-    "typescript": "^4.1.5"
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">= 18"
@@ -76,5 +76,8 @@
       "js",
       "tsx"
     ]
+  },
+  "dependencies": {
+    "@curveball/links": "^1.0.0"
   }
 }
