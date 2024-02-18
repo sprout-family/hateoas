@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.1 (????-??-??)
+0.1.1 (2024-02-18)
 ------------------
 
 * `uri` is now optional when creating State objects, and will default to the
