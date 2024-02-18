@@ -4,7 +4,7 @@ type StateInit<T extends StateSchema> = {
   data: T['data'];
   links?: Link[];
   relationships: SchemaToStateRelationships<T['relationships']>;
-  uri: string;
+  uri?: string;
   title?: string;
 }
 

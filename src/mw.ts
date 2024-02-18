@@ -21,7 +21,12 @@ export function hateoasMw(): Middleware {
     switch(desiredFormat) {
       case 'application/hal+json' :
         ctx.response.type = 'application/hal+json';
-        ctx.response.body = stateToHal(ctx.response.body);
+        ctx.response.body = stateToHal(
+          ctx.response.body,
+          {
+            defaultUri: ctx.request.requestTarget,
+          }
+        );
         break;
       default:
         throw new NotAcceptable('You must pass a valid Accept header for this endpoint. This endpoint supports the following: ' + formats.join(','));

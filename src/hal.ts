@@ -2,7 +2,11 @@ import { State } from './state.js';
 import { HalResource, HalLink } from 'hal-types';
 import { Link } from '@curveball/links';
 
-export function stateToHal(state: State): HalResource {
+type HalOptions = {
+  defaultUri?: string;
+};
+
+export function stateToHal(state: State, options: HalOptions = {}): HalResource {
 
   const links: Link[] = [];
   for(const link of state.links) {
@@ -28,7 +32,7 @@ export function stateToHal(state: State): HalResource {
 
   const halLinks: HalResource['_links'] = {
     self: {
-      href: state.uri ?? '',
+      href: state.uri ?? options.defaultUri ?? '',
       title: state.title,
     }
   };
