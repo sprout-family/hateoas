@@ -29,7 +29,7 @@ type SchemaToStateRelationships<T extends Record<string, any>> = {
  */
 export class State<TStateSchema extends StateSchema = SchemaDefaults> {
 
-  public uri: string;
+  public uri?: string;
   public links: Link[];
   public data: TStateSchema['data'];
   public relationships: SchemaToStateRelationships<TStateSchema['relationships']>;
@@ -62,7 +62,6 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
   }
 
 }
-
 
 type ArticleSchema = {
   data: {

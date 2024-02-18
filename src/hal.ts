@@ -12,6 +12,10 @@ export function stateToHal(state: State): HalResource {
 
     for(const relationship of Array.isArray(relationships) ? relationships : [relationships] ) {
 
+      if (!relationship.uri) {
+        console.warn('Cannot encode a relationship without a uri. Skipping relationship with rel "%s"', relType);
+        continue;
+      }
       links.push({
         rel: relType,
         href: relationship.uri,
@@ -24,7 +28,7 @@ export function stateToHal(state: State): HalResource {
 
   const halLinks: HalResource['_links'] = {
     self: {
-      href: state.uri,
+      href: state.uri ?? '',
       title: state.title,
     }
   };

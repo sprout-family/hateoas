@@ -1,7 +1,8 @@
 Changelog
 =========
 
-0.0.1 (2021-??-??)
+0.1.0 (2024-02-17)
 ------------------
 
-* First version
+* Added a `State` class and middleware that automatically generates
+  HAL.
