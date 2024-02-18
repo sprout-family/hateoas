@@ -1,12 +1,12 @@
-Curveball New Package
-=====================
+Curveball HATEOAS
+=================
 
-This repository serves as the skeleton for all new [Curveball][1] packages.
+This is an EXPERIMENTAL package to make it easier to build REST apis.
 
 Installation
 ------------
 
-    npm install @curveball/new-package 
+    npm i @sproutfamily/hateoas
 
 
 Getting started
