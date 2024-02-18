@@ -1,16 +1,16 @@
 import { Link } from '@curveball/links';
 
 type StateInit<T extends StateSchema> = {
-  data: T['data'],
-  links?: Link[],
-  relationships: SchemaToStateRelationships<T['relationships']>,
+  data: T['data'];
+  links?: Link[];
+  relationships: SchemaToStateRelationships<T['relationships']>;
   uri: string;
   title?: string;
 }
 
 type StateSchema = {
-  data: Record<string, any>,
-  relationships: Record<string, StateSchema>,
+  data: Record<string, any>;
+  relationships: Record<string, StateSchema>;
 }
 
 type SchemaDefaults = {
@@ -24,7 +24,7 @@ type SchemaToStateRelationships<T extends Record<string, any>> = {
 
 /**
  * The State represents a past, current or desired state.
- * 
+ *
  * This is sometimes called a Model or Entity in other systems.
  */
 export class State<TStateSchema extends StateSchema = SchemaDefaults> {
@@ -63,6 +63,7 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
 
 }
 
+/*
 type ArticleSchema = {
   data: {
     title: string;
@@ -104,3 +105,5 @@ const article = new State<ArticleSchema>({
 
 const yo = article.follow('author');
 console.debug(yo);
+
+*/

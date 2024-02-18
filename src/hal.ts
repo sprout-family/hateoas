@@ -1,10 +1,10 @@
-import { State } from "./state.js";
+import { State } from './state.js';
 import { HalResource, HalLink } from 'hal-types';
 import { Link } from '@curveball/links';
 
 export function stateToHal(state: State): HalResource {
 
-  const links: Link[] = []
+  const links: Link[] = [];
   for(const link of state.links) {
     links.push(link);
   }
@@ -53,10 +53,10 @@ export function stateToHal(state: State): HalResource {
       halLinks[link.rel] = {
         href: link.href,
         title: link.title,
-      }
+      };
     }
   }
-    
+
   return {
     _links: halLinks,
     ...state.data,

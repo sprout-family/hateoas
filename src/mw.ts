@@ -24,9 +24,9 @@ export function hateoasMw(): Middleware {
         ctx.response.body = stateToHal(ctx.response.body);
         break;
       default:
-        throw new NotAcceptable('You must pass a valid Accept header for this endpoint. This endpoint supports the following: ' + formats.join(',')); 
+        throw new NotAcceptable('You must pass a valid Accept header for this endpoint. This endpoint supports the following: ' + formats.join(','));
     }
 
-  }
+  };
 
 }
