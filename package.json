@@ -1,6 +1,6 @@
 {
   "name": "@curveball/new-package",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Description goes here",
   "type": "module",
   "exports": "./dist/index.js",
