@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.2 (????-??-??)
+------------------
+
+* Add support for Siren.
+* Show `alternate` links indicating the available options.
+
+
 0.1.1 (2024-02-18)
 ------------------
 
