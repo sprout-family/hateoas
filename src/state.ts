@@ -1,5 +1,8 @@
 import { Link } from '@curveball/links';
 
+/**
+ * This type is what's passsed to the constructor of the State class.
+ */
 type StateInit<T extends StateSchema> = {
   data: T['data'];
   links?: Link[];
@@ -8,16 +11,27 @@ type StateInit<T extends StateSchema> = {
   title?: string;
 }
 
+/**
+ * The StateSchema represents the general shape of the resource and tells us
+ * what properties exists in the State class, and what kind of relationships it
+ * has to other states.
+ */
 type StateSchema = {
   data: Record<string, any>;
   relationships: Record<string, StateSchema>;
 }
 
+/**
+ * This is effectively the 'any' State.
+ */
 type SchemaDefaults = {
-  data: Record<string, unknown>;
-  relationships: Record<string, SchemaDefaults>;
+  data: Record<string, any>;
+  relationships: Record<string, StateSchema>;
 }
 
+/**
+ * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]>
+ */
 type SchemaToStateRelationships<T extends Record<string, any>> = {
   [K in keyof T]: State<T[K]>[] | State<T[K]>;
 }

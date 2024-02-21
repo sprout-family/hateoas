@@ -1,7 +1,13 @@
 Changelog
 =========
 
-0.1.2 (????-??-??)
+0.1.3 (????-??-??)
+------------------
+
+* Loosen type of SchemaDefaults so it's more usable.
+
+
+0.1.2 (2024-02-18)
 ------------------
 
 * Add support for Siren.
