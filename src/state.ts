@@ -6,7 +6,7 @@ import { Link } from '@curveball/links';
 type StateInit<T extends StateSchema> = {
   data: T['data'];
   links?: Link[];
-  relationships: SchemaToStateRelationships<T['relationships']>;
+  relationships?: SchemaToStateRelationships<T['relationships']>;
   uri?: string;
   title?: string;
 }
@@ -54,7 +54,7 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     this.uri = init.uri;
     this.links = init.links ?? [];
     this.data = init.data;
-    this.relationships = init.relationships;
+    this.relationships = init.relationships ?? {} as typeof this.relationships;
     this.title = init.title;
 
   }

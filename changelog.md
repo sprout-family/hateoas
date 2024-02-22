@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 * Loosen type of SchemaDefaults so it's more usable.
+* Make the relationships property optional when constructing a state.
 
 
 0.1.2 (2024-02-18)
