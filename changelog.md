@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.4 (????-??-??)
+------------------
+
+* Add 'metadata' to state objects. Metadata will not be serialized.
+
+
 0.1.3 (2024-02-22)
 ------------------
 
