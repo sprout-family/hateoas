@@ -6,7 +6,7 @@ import { StateSchema } from './types.js';
  */
 type StateInit<T extends StateSchema> = {
   data: T['data'];
-  metadata: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
+  metadata?: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
   links?: Link[];
   relationships?: SchemaToStateRelationships<T['relationships']>;
   uri?: string;
