@@ -5,6 +5,7 @@ import { Link } from '@curveball/links';
  */
 type StateInit<T extends StateSchema> = {
   data: T['data'];
+  metadata: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
   links?: Link[];
   relationships?: SchemaToStateRelationships<T['relationships']>;
   uri?: string;
@@ -18,6 +19,7 @@ type StateInit<T extends StateSchema> = {
  */
 type StateSchema = {
   data: Record<string, any>;
+  metadata?: Record<string, any>;
   relationships: Record<string, StateSchema>;
 }
 
@@ -43,11 +45,35 @@ type SchemaToStateRelationships<T extends Record<string, any>> = {
  */
 export class State<TStateSchema extends StateSchema = SchemaDefaults> {
 
+  /**
+   * The (relative) URL pointing to the resource.
+   */
   public uri?: string;
+
+  /**
+   * A list of navigation links.
+   */
   public links: Link[];
+
+  /**
+   * Properties that will be serialized.
+   */
   public data: TStateSchema['data'];
+
+  /**
+   * List of relationships to other entities.
+   */
   public relationships: SchemaToStateRelationships<TStateSchema['relationships']>;
+
+  /**
+   * Human-readable title
+   */
   public title?: string;
+
+  /**
+   * Data relevant to the server but that will not be sent to clients.
+   */
+  public metadata: TStateSchema['metadata'];
 
   constructor(init: StateInit<TStateSchema & SchemaDefaults>) {
 
@@ -56,6 +82,7 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     this.data = init.data;
     this.relationships = init.relationships ?? {} as typeof this.relationships;
     this.title = init.title;
+    this.metadata = init.metadata ?? {};
 
   }
 
