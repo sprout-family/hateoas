@@ -80,7 +80,8 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     this.uri = init.uri;
     this.links = init.links ?? [];
     this.data = init.data;
-    this.relationships = init.relationships ?? {} as typeof this.relationships;
+    /* eslint "@typescript-eslint/consistent-type-assertions": "off" */
+    this.relationships = init.relationships ?? {} as this['relationships'];
     this.title = init.title;
     this.metadata = init.metadata ?? {};
 
