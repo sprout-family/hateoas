@@ -17,11 +17,11 @@ export interface CollectionOf<T extends StateSchema> extends StateSchema {
 
   data: {
     total: number;
-  }
+  };
 
   relationships: {
-    item: T,
-  }
+    item: T;
+  };
 
 
 }
