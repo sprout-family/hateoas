@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1.5 (????-??-??)
+------------------
+
+* `metadata` should be optional when constructring state
+
+
 0.1.4 (2024-02-22)
 ------------------
 
