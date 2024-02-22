@@ -5,6 +5,9 @@ Changelog
 ------------------
 
 * Add 'metadata' to state objects. Metadata will not be serialized.
+* Exporting `StateSchema`.
+* Added a `CollectionOf` utility type for easily turning a single entity in a
+  collection.
 
 
 0.1.3 (2024-02-22)

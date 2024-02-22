@@ -1,4 +1,5 @@
 import { Link } from '@curveball/links';
+import { StateSchema } from './types.js';
 
 /**
  * This type is what's passsed to the constructor of the State class.
@@ -12,16 +13,6 @@ type StateInit<T extends StateSchema> = {
   title?: string;
 }
 
-/**
- * The StateSchema represents the general shape of the resource and tells us
- * what properties exists in the State class, and what kind of relationships it
- * has to other states.
- */
-type StateSchema = {
-  data: Record<string, any>;
-  metadata?: Record<string, any>;
-  relationships: Record<string, StateSchema>;
-}
 
 /**
  * This is effectively the 'any' State.
@@ -37,6 +28,7 @@ type SchemaDefaults = {
 type SchemaToStateRelationships<T extends Record<string, any>> = {
   [K in keyof T]: State<T[K]>[] | State<T[K]>;
 }
+
 
 /**
  * The State represents a past, current or desired state.
