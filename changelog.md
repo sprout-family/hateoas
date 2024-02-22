@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1.3 (????-??-??)
+0.1.3 (2024-02-22)
 ------------------
 
 * Loosen type of SchemaDefaults so it's more usable.
