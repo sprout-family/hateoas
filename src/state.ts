@@ -26,7 +26,14 @@ type SchemaDefaults = {
  * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]>
  */
 type SchemaToStateRelationships<T extends Record<string, any>> = {
-  [K in keyof T]: State<T[K]>[] | State<T[K]>;
+  [K in keyof T]:
+    // Relationship link
+    | State<NonNullable<T[K]>>
+    // Multiple may be specified
+    | State<NonNullable<T[K]>>[]
+    // If the relationship is optional we allow null.
+    | (T[K] extends null ? null : never);
+
 }
 
 
