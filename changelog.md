@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.1.6 (????-??-??)
+------------------
+
+* Allow relationships to be specified as nullable. If it is nullable, it may be
+  omitted when creating a State.
+
+
 0.1.5 (2024-02-22)
 ------------------
 
