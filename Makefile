@@ -1,4 +1,5 @@
 SOURCE_FILES:=$(shell find src/ -type f -name '*.ts')
+TEST_FILES:=$(shell find test/ -type f -name '*.ts')
 
 .PHONY:all
 all: build
@@ -8,18 +9,18 @@ build: dist/build
 
 .PHONY:test
 test:
-	npx nyc mocha
+	npx tsx --test ${TEST_FILES}
 
 .PHONY:lint
 lint:
-	npx eslint --quiet 'src/**/*.ts' 'test/**/*.ts'
+	npx eslint --quiet
 
 .PHONY:lint-fix
 lint-fix: fix
 
 .PHONY:fix
 fix:
-	npx eslint --quiet 'src/**/*.ts' 'test/**/*.ts' --fix
+	npx eslint --quiet  --fix
 
 .PHONY:watch
 watch:
