@@ -22,7 +22,7 @@ type AuthorSchema = {
     name: string;
     website: string;
   }
-  relationships: {};
+  relationships: Record<string, never>,
 }
 
 
