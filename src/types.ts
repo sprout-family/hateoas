@@ -1,7 +1,7 @@
 /**
  * The StateSchema represents the general shape of the resource and tells us
  * what properties exists in the State class, and what kind of relationships it
- * has to other states.
+ * has to other schemas.
  */
 export interface StateSchema {
   data: Record<string, any>;

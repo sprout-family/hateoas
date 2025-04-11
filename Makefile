@@ -9,6 +9,7 @@ build: dist/build
 
 .PHONY:test
 test:
+	cd test; npx tsc
 	npx tsx --test ${TEST_FILES}
 
 .PHONY:lint
