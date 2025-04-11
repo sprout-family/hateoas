@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.2.0 (????-??-??)
+0.2.0 (2025-04-11)
 ------------------
 
 * Allow relationships to be specified as nullable. If it is nullable, it may be
