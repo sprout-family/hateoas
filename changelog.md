@@ -1,11 +1,13 @@
 Changelog
 =========
 
-0.1.6 (????-??-??)
+0.2.0 (2025-04-11)
 ------------------
 
 * Allow relationships to be specified as nullable. If it is nullable, it may be
   omitted when creating a State.
+* Updated all dependencies and removed mocha and chai dependency.
+* Dropped Node 18 support.
 
 
 0.1.5 (2024-02-22)
