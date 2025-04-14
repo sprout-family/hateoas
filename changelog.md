@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.3.0 (????-??-??)
+------------------
+
+* New Readme, and better statement of raison d'etre.
+* `stateToHal` and `stateToSiren` are now exported.
+* Relationships may now be specified as optional using `null` when defining the
+  schema.
+* If all of a `StateSchema`s relationships are optional, the entire
+  `relationships` object may now be omitted when creating a State object.
+* and  are now exported.
+
+
 0.2.0 (2025-04-11)
 ------------------
 
