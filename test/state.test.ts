@@ -1,12 +1,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { State } from '../src/state.js';
+import { State, StateSchema } from '../src/index.js';
 
 /**
  * Note: This file doesn't really run any code, but exists to validate
  * assumptions about the types this package exports.
  */
-
 type ArticleSchema = {
   data: {
     title: string;
@@ -14,20 +13,29 @@ type ArticleSchema = {
   },
   relationships: {
     author: AuthorSchema
+    category: CategorySchema | null
   }
 }
 
-type AuthorSchema = {
+/**
+ * Interface should work the same as type
+ */
+interface AuthorSchema extends StateSchema {
   data: {
     name: string;
     website: string;
   }
-  relationships: Record<string, never>,
+}
+
+interface CategorySchema extends StateSchema {
+  data: {
+    name: string;
+  }
 }
 
 
 describe('State Schemas', () => {
-  it('Should be correct from a Typescript perspective and pass basic tests', () => {
+  it('Should allow instantiating a State graph', () => {
 
     const author = new State<AuthorSchema>({
       uri: '/author/1',
@@ -35,8 +43,6 @@ describe('State Schemas', () => {
         name: 'Evert',
         website: 'https://evertpot.com/'
       },
-      relationships: {},
-
     });
 
     const article = new State<ArticleSchema>({
@@ -46,7 +52,8 @@ describe('State Schemas', () => {
         body: 'SUPPP',
       },
       relationships: {
-        author
+        author,
+        category: null
       }
     });
 

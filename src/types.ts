@@ -6,7 +6,7 @@
 export interface StateSchema {
   data: Record<string, any>;
   metadata?: Record<string, any>;
-  relationships: Record<string, StateSchema>;
+  relationships: Record<string, StateSchema | null>;
 }
 
 
