@@ -4,35 +4,68 @@ import { StateSchema } from './types.js';
 /**
  * This type is what's passsed to the constructor of the State class.
  */
-type StateInit<T extends StateSchema> = {
+type StateInit<T extends StateSchema> = AllOptional<T> extends true ? {
   data: T['data'];
   metadata?: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
   links?: Link[];
-  relationships?: SchemaToStateRelationships<T['relationships']>;
+  relationships?: SchemaToInitRelationships<T['relationships']>;
+  uri?: string;
+  title?: string;
+} : {
+  data: T['data'];
+  metadata?: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
+  links?: Link[];
+  relationships: SchemaToInitRelationships<T['relationships']>;
   uri?: string;
   title?: string;
 }
-
 
 /**
  * This is effectively the 'any' State.
  */
 type SchemaDefaults = {
   data: Record<string, any>;
-  relationships: Record<string, StateSchema>;
+  relationships: Record<string, StateSchema|null>;
 }
 
 /**
- * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]>
+ * This helper type takes an object type T, and if all of its properties
+ * are optional, it, it returns the 'true' type otherwise, it returns 'false'.
  */
-type SchemaToStateRelationships<T extends Record<string, any>> = {
+type AllOptional<T> = {
+  [K in keyof T]-?: undefined extends T[K] ? never : K
+} extends {
+  [K in keyof T]: never
+} ? false : true;
+
+
+/**
+ * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]|null>
+ *
+ * If the relationships are optional, it allows null, making it more
+ * convenient to create a State.
+ */
+type SchemaToInitRelationships<T extends Record<string, any>> = {
   [K in keyof T]:
     // Relationship link
     | State<NonNullable<T[K]>>
     // Multiple may be specified
     | State<NonNullable<T[K]>>[]
     // If the relationship is optional we allow null.
-    | (T[K] extends null ? null : never);
+    | (null extends T[K] ? null : never);
+};
+
+/**
+ * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]>
+ *
+ * Unlike SchemaToInitRelationships, this type does not allow null.
+ */
+type SchemaToStateRelationships<T extends Record<string, any>> = {
+  [K in keyof T]:
+    // Relationship link
+    | State<NonNullable<T[K]>>
+    // Multiple may be specified
+    | State<NonNullable<T[K]>>[];
 
 }
 
@@ -79,14 +112,17 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     this.uri = init.uri;
     this.links = init.links ?? [];
     this.data = init.data;
-    /* eslint "@typescript-eslint/consistent-type-assertions": "off" */
-    this.relationships = init.relationships ?? {} as this['relationships'];
+    this.relationships = Object.fromEntries(
+      Object.entries(init.relationships ?? {})
+        .filter(([_, v]) => v !== null)
+    ) as SchemaToStateRelationships<TStateSchema['relationships']>;
+
     this.title = init.title;
     this.metadata = init.metadata ?? {};
 
   }
 
-  follow<T extends string>(rel: T): State<TStateSchema['relationships'][T]> {
+  follow<T extends string>(rel: T): State<NonNullable<TStateSchema['relationships'][T]>> {
 
     const result = this.relationships[rel];
     if (!result) {
@@ -96,11 +132,10 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
       if (result.length === 0) {
         throw new Error('Relationship not found: ' + rel);
       }
-      return result[0];
+      return result[0] as any;
     }
-    return result;
+    return result as any;
 
   }
 
 }
-
