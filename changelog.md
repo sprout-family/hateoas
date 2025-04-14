@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.0 (????-??-??)
+0.3.0 (2025-04-14)
 ------------------
 
 * New Readme, and better statement of raison d'etre.
