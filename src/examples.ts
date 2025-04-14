@@ -53,5 +53,5 @@ const article = new State<ArticleSchema>({
   }
 });
 
-console.log(JSON.stringify(stateToHal(article)));
-console.log(JSON.stringify(stateToSiren(article)));
+console.info(JSON.stringify(stateToHal(article)));
+console.info(JSON.stringify(stateToSiren(article)));
