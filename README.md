@@ -42,7 +42,7 @@ the API of this library needs to effectively become an application of
 [Linked Data][1], and instead creating mappings from other formats to this
 kind of data model.
 
-We just want to make it easier to describe and work with 'JSON + links'-style$
+We just want to make it easier to describe and work with 'JSON + links'-style
 formats. 
 
 What the library actually does
@@ -210,26 +210,9 @@ Slightly later:
 
 * Actions (HAL Forms, Siren actions, HTML forms).
 * Hooks for resolving remote resources. (required for building clients).
-* Support for Collection+JSON, JSON-LD and others.
+* Support for Collection+JSON, JSON-API and formats that map well to this library.
 * Support for automatically instantiating a State from a [Request][2] object.
 
-
-
-Installation
-------------
-
-    npm i @sproutfamily/hateoas
-
-
-Getting started
----------------
-
-...
-
-API
----
-
-...
 
 [1]: https://en.wikipedia.org/wiki/Linked_data
 [2]: https://developer.mozilla.org/en-US/docs/Web/API/Request
