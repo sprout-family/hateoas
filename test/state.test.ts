@@ -26,7 +26,6 @@ interface CategorySchema extends StateSchema {
   }
 }
 
-
 describe('State Schemas', () => {
   it('Should allow instantiating a State graph', () => {
 
@@ -34,7 +33,7 @@ describe('State Schemas', () => {
       uri: '/author/1',
       data: {
         name: 'Evert',
-        website: 'https://evertpot.com/'
+        website: 'https://evertpot.com/',
       },
     });
 
@@ -54,4 +53,20 @@ describe('State Schemas', () => {
     assert.strictEqual(yo, author);
 
   });
+
+  it('The type system should reject unknown properties when creating the State', () => {
+
+    new State<AuthorSchema>({
+      uri: '/author/1',
+      data: {
+        name: 'Evert',
+        website: 'https://evertpot.com/',
+        // @ts-expect-error we should get an error when using unknown properties.
+        randomProp: 'should error',
+      },
+    });
+
+  });
+
+
 });
