@@ -107,7 +107,7 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
    */
   public metadata: TStateSchema['metadata'];
 
-  constructor(init: StateInit<TStateSchema & SchemaDefaults>) {
+  constructor(init: StateInit<TStateSchema>) {
 
     this.uri = init.uri;
     this.links = init.links ?? [];
