@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3.1 (????-??-??)
+0.3.1 (2025-04-15)
 ------------------
 
 * The type system should reject unknown properties when creating a State.
