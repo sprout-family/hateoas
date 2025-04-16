@@ -38,7 +38,7 @@ describe('State Schemas', () => {
     });
 
     const article = new State<ArticleSchema>({
-      uri: '/author/2',
+      uri: '/article/2',
       data: {
         title: 'Hello world',
         body: 'SUPPP',
@@ -68,5 +68,66 @@ describe('State Schemas', () => {
 
   });
 
+  it('The type system should error when accessing an optional relationship', () => {
+
+    const author = new State<AuthorSchema>({
+      uri: '/author/1',
+      data: {
+        name: 'Evert',
+        website: 'https://evertpot.com/',
+      },
+    });
+    const article = new State<ArticleSchema>({
+      uri: '/article/2',
+      data: {
+        title: 'Hello world',
+        body: 'SUPPP',
+      },
+      relationships: {
+        author,
+        category: null
+      }
+    });
+    // We're not executing this code, just testing the type system.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    () => {
+
+      // @ts-expect-error category is optional, so we should get an error.
+      const category = article.follow('category').data.name;
+      console.info(category);;
+
+    };
+
+  });
+  it('The type system should not error when accessing a required relationship', () => {
+
+    const author = new State<AuthorSchema>({
+      uri: '/author/1',
+      data: {
+        name: 'Evert',
+        website: 'https://evertpot.com/',
+      },
+    });
+    const article = new State<ArticleSchema>({
+      uri: '/article/2',
+      data: {
+        title: 'Hello world',
+        body: 'SUPPP',
+      },
+      relationships: {
+        author,
+        category: null
+      }
+    });
+    // We're not executing this code, just testing the type system.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    () => {
+
+      const author = article.follow('author').data.name;
+      console.info(author);
+
+    };
+
+  });
 
 });
