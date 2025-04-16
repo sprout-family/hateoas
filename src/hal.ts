@@ -1,12 +1,13 @@
 import { State } from './state.js';
 import { HalResource, HalLink } from 'hal-types';
 import { Link } from '@curveball/links';
+import { StateSchema } from './types.js';
 
 type HalOptions = {
   defaultUri?: string;
 };
 
-export function stateToHal(state: State, options: HalOptions = {}): HalResource {
+export function stateToHal<T extends StateSchema>(state: State<T>, options: HalOptions = {}): HalResource {
 
   const links: Link[] = [];
   for(const link of state.links) {
@@ -14,6 +15,9 @@ export function stateToHal(state: State, options: HalOptions = {}): HalResource 
   }
   for(const [relType, relationships] of Object.entries(state.relationships)) {
 
+    if (!relationships) {
+      continue;
+    }
     for(const relationship of Array.isArray(relationships) ? relationships : [relationships] ) {
 
       if (!relationship.uri) {

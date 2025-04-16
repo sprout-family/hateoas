@@ -8,14 +8,14 @@ type StateInit<T extends StateSchema> = AllOptional<T> extends true ? {
   data: T['data'];
   metadata?: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
   links?: Link[];
-  relationships?: SchemaToInitRelationships<T['relationships']>;
+  relationships?: SchemaToStateRelationships<T['relationships']>;
   uri?: string;
   title?: string;
 } : {
   data: T['data'];
   metadata?: T['metadata'] extends Record<string,any> ? T['metadata'] : undefined;
   links?: Link[];
-  relationships: SchemaToInitRelationships<T['relationships']>;
+  relationships: SchemaToStateRelationships<T['relationships']>;
   uri?: string;
   title?: string;
 }
@@ -38,14 +38,12 @@ type AllOptional<T> = {
   [K in keyof T]: never
 } ? false : true;
 
-
 /**
  * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]|null>
  *
- * If the relationships are optional, it allows null, making it more
- * convenient to create a State.
+ * If the relationships are optional, it allows null
  */
-type SchemaToInitRelationships<T extends Record<string, any>> = {
+type SchemaToStateRelationships<T extends Record<string, any>> = {
   [K in keyof T]:
     // Relationship link
     | State<NonNullable<T[K]>>
@@ -56,19 +54,16 @@ type SchemaToInitRelationships<T extends Record<string, any>> = {
 };
 
 /**
- * A helper type that converts the relationships of a StateSchema to a Record<rel, State|State[]>
- *
- * Unlike SchemaToInitRelationships, this type does not allow null.
+ * A helper type that converts the relationships of a StateSchema to what follow() returns,
+ * which is always a single State, or a null.
  */
-type SchemaToStateRelationships<T extends Record<string, any>> = {
+type SchemaToFollowRelationships<T extends Record<string, any>> = {
   [K in keyof T]:
     // Relationship link
     | State<NonNullable<T[K]>>
-    // Multiple may be specified
-    | State<NonNullable<T[K]>>[];
-
-}
-
+    // If the relationship is optional we allow null.
+    | (null extends T[K] ? null : never);
+};
 
 /**
  * The State represents a past, current or desired state.
@@ -122,20 +117,25 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
 
   }
 
-  follow<T extends string>(rel: T): State<NonNullable<TStateSchema['relationships'][T]>> {
+  follow<T extends keyof TStateSchema['relationships']>(rel: T): SchemaToFollowRelationships<TStateSchema['relationships']>[T] {
 
     const result = this.relationships[rel];
     if (!result) {
-      throw new Error('Relationship not found: ' + rel);
+      // Typescript can't figure this out yet, so we cast to any for now.
+      return null as any;
     }
     if (Array.isArray(result)) {
       if (result.length === 0) {
-        throw new Error('Relationship not found: ' + rel);
+        throw new Error('Relationship not found');
       }
-      return result[0] as any;
+      return result[0];
     }
     return result as any;
 
+  }
+
+  getRelationships(): NonNullable<TStateSchema['relationships']>[string][] {
+    return Object.values(this.relationships).flat();
   }
 
 }

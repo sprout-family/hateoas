@@ -12,6 +12,9 @@ export interface StateSchema {
 
 /**
  * This utility schema represents the usual shape of a collection.
+ *
+ * Using it is completely optional, but it's an exampel of how schemas
+ * might be combined and composed.
  */
 export interface CollectionOf<T extends StateSchema> extends StateSchema {
 

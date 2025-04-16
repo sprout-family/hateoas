@@ -1,4 +1,5 @@
 import { State } from './state.js';
+import { StateSchema } from './types.js';
 
 type SirenOptions = {
   defaultUri?: string;
@@ -23,7 +24,7 @@ type SirenLink = {
 
 type SirenSubEntity = SirenEntity & { rel: string[] };
 
-export function stateToSiren(state: State, options: SirenOptions = {}): SirenEntity {
+export function stateToSiren<T extends StateSchema>(state: State<T>, options: SirenOptions = {}): SirenEntity {
 
   const links: SirenLink[] = [];
   const entities: SirenLink[] = [];
@@ -48,6 +49,9 @@ export function stateToSiren(state: State, options: SirenOptions = {}): SirenEnt
 
   for(const [rel, relationships] of Object.entries(state.relationships)) {
 
+    if (!relationships) {
+      continue;
+    }
     for(const relationship of Array.isArray(relationships) ? relationships : [relationships]) {
 
       if (!relationship.uri) {
