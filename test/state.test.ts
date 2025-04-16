@@ -89,11 +89,12 @@ describe('State Schemas', () => {
       }
     });
     // We're not executing this code, just testing the type system.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     () => {
 
       // @ts-expect-error category is optional, so we should get an error.
       const category = article.follow('category').data.name;
-      console.log(category);;
+      console.info(category);;
 
     };
 
@@ -119,10 +120,11 @@ describe('State Schemas', () => {
       }
     });
     // We're not executing this code, just testing the type system.
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     () => {
 
       const author = article.follow('author').data.name;
-      console.log(author);
+      console.info(author);
 
     };
 
