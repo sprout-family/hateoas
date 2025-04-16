@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4.0 (????-??-??)
+------------------
+
+* `.follow()` will now return null for a relationship that's not found.
+
+
 0.3.1 (2025-04-15)
 ------------------
 
