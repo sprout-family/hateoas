@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.5.0 (????-??-??)
+------------------
+
+* Delete curveball middleware. This is now out of scope for what this lirary
+  should become.
+
+
 0.4.0 (2025-04-16)
 ------------------
 
