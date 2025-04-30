@@ -6,6 +6,8 @@ Changelog
 
 * Delete curveball middleware. This is now out of scope for what this lirary
   should become.
+* Added a basic schema for describing actions. This is not yet supported in the
+  `State` class, but it exists in the Schema types.
 
 
 0.4.0 (2025-04-16)
