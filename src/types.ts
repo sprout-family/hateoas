@@ -7,6 +7,7 @@ export interface StateSchema {
   data: Record<string, any>;
   metadata?: Record<string, any>;
   relationships: Record<string, StateSchema | null>;
+  actions?: Record<string, ActionSchema>;
 }
 
 
@@ -26,5 +27,15 @@ export interface CollectionOf<T extends StateSchema> extends StateSchema {
     item: T;
   };
 
+}
+
+/**
+ * This schema represents an action that can be performed on a resource.
+ */
+export interface ActionSchema {
+
+  name: string;
+  request: any;
+  response: any;
 
 }
