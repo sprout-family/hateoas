@@ -29,9 +29,7 @@
     "framework",
     "nodejs",
     "typescript",
-    "push",
-    "http2",
-    "curveball"
+    "http2"
   ],
   "author": "Evert Pot (https://evertpot.com/)",
   "license": "MIT",
@@ -40,12 +38,11 @@
   },
   "homepage": "https://github.com/curveball/new-package#readme",
   "devDependencies": {
-    "@curveball/kernel": "^1.0.0",
     "@types/node": "^18.19.9",
     "eslint": "^9.9.1",
+    "tsx": "^4.19.3",
     "typescript": "^5.3.3",
-    "typescript-eslint": "^8.29.1",
-    "tsx": "^4.19.3"
+    "typescript-eslint": "^8.29.1"
   },
   "engines": {
     "node": ">= 18"
@@ -54,9 +51,6 @@
     "extension": [
       ".ts"
     ]
-  },
-  "peerDependencies": {
-    "@curveball/kernel": "^1"
   },
   "mocha": {
     "loader": [
