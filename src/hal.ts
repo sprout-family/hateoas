@@ -1,6 +1,6 @@
 import { State } from './state.js';
 import { HalResource, HalLink } from 'hal-types';
-import { Link } from '@curveball/links';
+import { Link } from './link.js';
 import { StateSchema } from './types.js';
 
 type HalOptions = {
