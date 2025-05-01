@@ -1,4 +1,4 @@
-import { Link } from '@curveball/links';
+import { Link } from './link.js';
 import { StateSchema } from './types.js';
 
 /**

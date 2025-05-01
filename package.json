@@ -52,18 +52,7 @@
       ".ts"
     ]
   },
-  "mocha": {
-    "loader": [
-      "ts-node/esm"
-    ],
-    "recursive": true,
-    "extension": [
-      "ts",
-      "js",
-      "tsx"
-    ]
-  },
   "dependencies": {
-    "@curveball/links": "^1.0.0"
+    "hal-types": "^2.0.0"
   }
 }
