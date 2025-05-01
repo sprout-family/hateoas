@@ -4,10 +4,12 @@ Changelog
 0.5.0 (????-??-??)
 ------------------
 
+* Links now support link-hints.
 * Delete curveball middleware. This is now out of scope for what this lirary
   should become.
 * Added a basic schema for describing actions. This is not yet supported in the
   `State` class, but it exists in the Schema types.
+* No more dependencies on Curveball framework.
 
 
 0.4.0 (2025-04-16)
