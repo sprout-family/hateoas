@@ -45,7 +45,7 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
 
     const newLink:HalLink = {
       href: link.href,
-    }
+    };
 
     if (link.title) newLink.title = link.title;
     if (link.type) newLink.type = link.type;
