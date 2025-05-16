@@ -43,7 +43,13 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
 
   for(const link of links) {
 
-    const { rel, ...newLink } = link;
+    const newLink:HalLink = {
+      href: link.href,
+    }
+
+    if (link.title) newLink.title = link.title;
+    if (link.type) newLink.type = link.type;
+    if (link.hints) newLink.hints = link.hints;
 
     if (halLinks[link.rel]) {
       // There already was a link with this rel
