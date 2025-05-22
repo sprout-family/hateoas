@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5.1 (????-??-??)
+0.6.0 (2025-05-22)
 ------------------
 
 * Encode 'type' and 'hints' in HAL serialization
