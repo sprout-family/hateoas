@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.5.1 (????-??-??)
+------------------
+
+* Add 'followAll' function to the State class
+
+
 0.5.0 (2025-05-01)
 ------------------
 
