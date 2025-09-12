@@ -42,26 +42,29 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
   };
 
   for(const link of links) {
+
+    const newLink:HalLink = {
+      href: link.href,
+    };
+
+    if (link.title) newLink.title = link.title;
+    if (link.type) newLink.type = link.type;
+    if (link.hints) newLink.hints = link.hints;
+
     if (halLinks[link.rel]) {
+      // There already was a link with this rel
       if (Array.isArray(halLinks[link.rel])) {
-        (halLinks[link.rel] as HalLink[]).push({
-          href: link.href,
-          title: link.title,
-        });
+        // It was an array, so we just add one more
+        (halLinks[link.rel] as HalLink[]).push(newLink);
       } else {
+        // Convert existing link to array
         halLinks[link.rel] = [
           halLinks[link.rel] as HalLink,
-          {
-            href: link.href,
-            title: link.title,
-          }
+          newLink
         ];
       }
     } else {
-      halLinks[link.rel] = {
-        href: link.href,
-        title: link.title,
-      };
+      halLinks[link.rel] = newLink;
     }
   }
 
