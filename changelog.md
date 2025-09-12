@@ -1,15 +1,17 @@
 Changelog
 =========
 
-0.6.1 (????-??-??)
+0.6.1 (2025-09-12)
 ------------------
 
 * Add 'followAll' function to the State class
+
 
 0.6.0 (2025-05-22)
 ------------------
 
 * Encode 'type' and 'hints' in HAL serialization
+
 
 0.5.0 (2025-05-01)
 ------------------
