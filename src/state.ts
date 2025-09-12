@@ -117,6 +117,12 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
 
   }
 
+  /**
+   * Follow a relationship by it's 'rel'.
+   *
+   * If there are multiple resources with the same rel, one will be returned.
+   * If no resources exist with this relationship this function returns null.
+   */
   follow<T extends keyof TStateSchema['relationships']>(rel: T): SchemaToFollowRelationships<TStateSchema['relationships']>[T] {
 
     const result = this.relationships[rel];
@@ -133,6 +139,29 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     return result as any;
 
   }
+
+  /**
+   * Find all linked relationships with a given rel.
+   *
+   * This returns an array of relationships that match the given rel.
+   * If no relationships exist with this relationship this function returns an empty array.
+   */
+  followAll<T extends keyof TStateSchema['relationships']>(rel: T): SchemaToFollowRelationships<TStateSchema['relationships']>[T][] {
+
+    const result = this.relationships[rel];
+    if (!result) {
+      // Typescript can't figure this out yet, so we cast to any for now.
+      return [];
+    }
+    if (Array.isArray(result)) {
+      return [...result];
+    } else {
+      // @ts-expect-error This is defined as 'never' by Typescript, which typically is correct if all types are fully specified. But we want to effectively allow 'any' for arbitrary schemas, and for those cases this can totally happen.
+      return [result];
+    }
+
+  }
+
 
   getRelationships(): NonNullable<TStateSchema['relationships']>[string][] {
     return Object.values(this.relationships).flat();

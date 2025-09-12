@@ -130,4 +130,55 @@ describe('State Schemas', () => {
 
   });
 
+  it('followAll() should return all linked states for a given rel', () => {
+
+    const category1 = new State<CategorySchema>({
+      uri: '/category/1',
+      data: {
+        name: 'Category 1',
+
+      }
+    });
+
+    const category2 = new State<CategorySchema>({
+      uri: '/category/2',
+      data: {
+        name: 'Category 2',
+      }
+    });
+
+    const author = new State<AuthorSchema>({
+      uri: '/author/1',
+      data: {
+        name: 'Evert',
+        website: 'https://evertpot.com/',
+      },
+    });
+
+    const article = new State<ArticleSchema>({
+      uri: '/article/2',
+      data: {
+        title: 'Hello world',
+        body: 'SUPPP',
+      },
+      relationships: {
+        author,
+        category: [category1, category2],
+      }
+    });
+
+    const categories = article.followAll('category');
+    assert.strictEqual(categories.length, 2);
+    assert.strictEqual(categories[0], category1);
+    assert.strictEqual(categories[1], category2);
+
+    const authors = article.followAll('author');
+    assert.strictEqual(authors.length, 1);
+    assert.strictEqual(authors[0], author);
+
+    const noResults = article.followAll('non-existing' as any);
+    assert.strictEqual(noResults.length, 0);
+
+  });
+
 });
