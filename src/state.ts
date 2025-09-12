@@ -156,9 +156,7 @@ export class State<TStateSchema extends StateSchema = SchemaDefaults> {
     if (Array.isArray(result)) {
       return [...result];
     } else {
-      // @ts-ignore This is defined as 'never' by Typescript, which typically is correct
-      // if all types are fully specified. But we want to effectively allow 'any' for
-      // arbitrary schemeas, and for those cases this can totally happen.
+      // @ts-expect-error This is defined as 'never' by Typescript, which typically is correct if all types are fully specified. But we want to effectively allow 'any' for arbitrary schemas, and for those cases this can totally happen.
       return [result];
     }
 

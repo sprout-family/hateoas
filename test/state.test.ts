@@ -176,8 +176,8 @@ describe('State Schemas', () => {
     assert.strictEqual(authors.length, 1);
     assert.strictEqual(authors[0], author);
 
-   const noResults = article.followAll('non-existing' as any);
-   assert.strictEqual(noResults.length, 0);
+    const noResults = article.followAll('non-existing' as any);
+    assert.strictEqual(noResults.length, 0);
 
   });
 
