@@ -13,7 +13,7 @@ type HalOptions = {
    * When provided, any relationships (specified with 'rel') in this list
    * will be included in the '_embedded' section of the HAL resource.
    *
-   * Otherwise, we they will only be included in the '_links' section.
+   * Otherwise, they will only be included in the '_links' section.
    */
   embedRels?: string[];
 };
