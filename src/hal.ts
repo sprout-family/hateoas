@@ -4,12 +4,24 @@ import { Link } from './link.js';
 import { StateSchema } from './types.js';
 
 type HalOptions = {
+  /**
+   * If no 'self' link is provided in the state, this URI will be used as the 'self' link.
+   */
   defaultUri?: string;
+
+  /**
+   * When provided, any relationships (specified with 'rel') in this list
+   * will be included in the '_embedded' section of the HAL resource.
+   *
+   * Otherwise, they will only be included in the '_links' section.
+   */
+  embedRels?: string[];
 };
 
 export function stateToHal<T extends StateSchema>(state: State<T>, options: HalOptions = {}): HalResource {
 
   const links: Link[] = [];
+  const embedded: HalResource['_embedded'] = {};
   for(const link of state.links) {
     links.push(link);
   }
@@ -24,11 +36,29 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
         console.warn('Cannot encode a relationship without a uri. Skipping relationship with rel "%s"', relType);
         continue;
       }
-      links.push({
-        rel: relType,
-        href: relationship.uri,
-        title: relationship.title,
-      });
+      if (options.embedRels && options.embedRels.includes(relType)) {
+        // This relationship should be embedded
+        if (!embedded[relType]) {
+          embedded[relType] = stateToHal(relationship, options);
+        } else if (Array.isArray(embedded[relType])) {
+          // We already have an array of embedded resources for this relType
+          embedded[relType].push(stateToHal(relationship, options));
+        } else {
+          // We already have a single embedded resource for this relType
+          // Convert it to an array and add the new one
+          embedded[relType] = [embedded[relType], stateToHal(relationship, options)];
+        }
+
+      } else {
+        const link: any = {
+          rel: relType,
+          href: relationship.uri,
+        };
+        if (relationship.title) {
+          link.title = relationship.title;
+        }
+        links.push(link);
+      }
 
     }
 
@@ -68,10 +98,13 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
     }
   }
 
-  return {
+  const result: HalResource = {
     _links: halLinks,
     ...state.data,
   };
-
+  if (Object.keys(embedded).length > 0) {
+    result._embedded = embedded;
+  }
+  return result;
 
 }
