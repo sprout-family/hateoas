@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7.0 (????-??-??)
+0.7.0 (2025-09-19)
 ------------------
 
 * When serializing to HAL, it's now possible to specify that certain
