@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.6.2 (????-??-??)
+------------------
+
+* When serializing to HAL, it's now possible to specify that certain
+  relationships should be in _embedded.
+
+
 0.6.1 (2025-09-12)
 ------------------
 
