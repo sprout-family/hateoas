@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6.2 (????-??-??)
+0.7.0 (????-??-??)
 ------------------
 
 * When serializing to HAL, it's now possible to specify that certain
