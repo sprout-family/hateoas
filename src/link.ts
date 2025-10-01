@@ -36,4 +36,11 @@ export type Link = {
    */
   hints?: LinkHints;
 
+  /**
+   * If true, this is a template link.
+   *
+   * Templated link have variables that must be expanded to follow the link.
+   */
+  templated?: boolean;
+
 }
