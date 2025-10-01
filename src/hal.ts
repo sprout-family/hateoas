@@ -80,6 +80,7 @@ export function stateToHal<T extends StateSchema>(state: State<T>, options: HalO
     if (link.title) newLink.title = link.title;
     if (link.type) newLink.type = link.type;
     if (link.hints) newLink.hints = link.hints;
+    if (link.templated) newLink.templated = link.templated;
 
     if (halLinks[link.rel]) {
       // There already was a link with this rel
