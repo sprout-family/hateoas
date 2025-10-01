@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.7.1 (????-??-??)
+0.7.1 (2025-10-01)
 ------------------
 
 * Add support for HAL's templated links.
